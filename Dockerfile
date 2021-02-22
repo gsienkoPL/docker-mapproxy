@@ -1,6 +1,6 @@
 #--------- Generic stuff all our Dockerfiles should start with so we get caching ------------
 FROM python:3.7
-MAINTAINER Tim Sutton<tim@kartoza.com>
+MAINTAINER G Sienko<grzegorz.sienko@lublin.eu>
 
 RUN apt-get -y update
 
@@ -16,13 +16,16 @@ RUN apt-get install -y \
     libjpeg-dev \
     zlib1g-dev \
     libfreetype6-dev \
-    python-virtualenv
+    python-virtualenv \
+    && apt-get -y --purge autoremove && apt-get clean
+    && rm -rf /var/lib/apt/lists/* 
 
-RUN pip install Shapely Pillow MapProxy uwsgi
+RUN pip3 install Numpy PyYaml boto3 request eventlet lxml Shapely Pillow uwsgi redis
+RUN pip3 install git+https://github.com/mapproxy/mapproxy.git@1.13.0
 
 EXPOSE 8080
 
-ADD uwsgi.conf /uwsgi.conf
+ADD app.py /mapproxy/app.py
 ADD start.sh /start.sh
 RUN chmod 0755 /start.sh
 

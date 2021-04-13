@@ -17,7 +17,7 @@ RUN apt-get install -y \
     zlib1g-dev \
     libfreetype6-dev \
     python-virtualenv \
-    && apt-get -y --purge autoremove && apt-get clean \\
+    && apt-get -y --purge autoremove && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
 RUN pip3 install Numpy PyYaml boto3 request eventlet lxml Shapely Pillow uwsgi redis

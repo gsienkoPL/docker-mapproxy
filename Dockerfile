@@ -20,7 +20,7 @@ RUN apt-get install -y \
     && apt-get -y --purge autoremove && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
-RUN pip3 install Numpy PyYaml boto3 request eventlet lxml Shapely Pillow uwsgi redis
+RUN pip3 install Numpy PyYaml lxml Shapely Pillow uwsgi redis
 RUN pip3 install git+https://github.com/mapproxy/mapproxy.git@1.13.0
 
 EXPOSE 8080
